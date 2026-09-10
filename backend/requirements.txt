@@ -1,0 +1,6 @@
+livekit-agents[groq,rime,silero]~=1.5
+python-dotenv
+livekit-api
+fastapi
+uvicorn[standard]
+psycopg[binary]

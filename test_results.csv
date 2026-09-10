@@ -1,0 +1,16 @@
+trial,type,room,latency_ms,event_detected,stale_content,recovery_correct
+1,single,test-viva-e6594558,520.0,True,no,yes
+2,single,test-viva-bd9f757a,187.9,True,no,yes
+3,single,test-viva-fa4daed7,264.5,True,no,yes
+4,single,test-viva-ba90379a,132.5,True,no,yes
+5,single,test-viva-1f7c2c65,393.1,True,no,yes
+6,single,test-viva-ad9b6bcb,127.9,True,no,yes
+7,single,test-viva-faf608bb,155.5,True,no,yes
+8,single,test-viva-5b51d20c,562.0,True,no,yes
+9,single,test-viva-caced0e2,699.4,True,no,yes
+10,single,test-viva-a235ed76,193.0,True,no,yes
+11,double,test-viva-7e0ef069,196.0,True,no,yes
+12,double,test-viva-8f72b5c7,348.8,True,no,yes
+13,double,test-viva-3e6eb609,528.3,True,no,yes
+14,double,test-viva-36583ff4,393.4,True,no,yes
+15,double,test-viva-9db5ccd8,576.9,True,no,yes

@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Barge-In Viva — design tokens (Tailwind v4 @theme)
+   Direction: matches the LiveKit Playground reference look —
+   near-black surface, cyan for the examiner's active voice.
+   Warm red reserved ONLY for the interrupt moment — still
+   functional color, not decorative, just a different palette.
+   ============================================================ */
+@theme {
+  --color-bg: #08090a;
+  --color-panel: #0e1012;
+  --color-panel-raised: #16191c;
+
+  --color-ink: #e7eaec;
+  --color-ink-dim: #8b949a;
+  --color-ink-faint: #4d565b;
+
+  --color-cyan: #22d3ee;
+  --color-cyan-soft: #0e7d92;
+  --color-cyan-glow: rgba(34, 211, 238, 0.45);
+
+  --color-interrupt: #f2545b;
+  --color-interrupt-glow: rgba(242, 84, 91, 0.5);
+
+  --color-sage: #4ade80;
+  --color-sage-glow: rgba(74, 222, 128, 0.35);
+
+  --color-rule: rgba(231, 234, 236, 0.1);
+  --color-rule-strong: rgba(231, 234, 236, 0.18);
+
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-body: "IBM Plex Sans", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-rule-strong);
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

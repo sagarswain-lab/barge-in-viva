@@ -1,0 +1,66 @@
+# Render Blueprint — deploys the API, the agent worker, and a shared
+# Postgres database from this backend/ directory.
+# In Render: New → Blueprint → point at this repo, root directory `backend`.
+# Secrets marked "sync: false" must be filled in manually in the Render
+# dashboard after the first deploy — never commit real values here.
+
+databases:
+  - name: barge-in-viva-db
+    plan: free
+    databaseName: barge_in_viva
+    user: barge_in_viva
+
+services:
+  # HTTP API: session creation (token minting) + session history.
+  - type: web
+    name: barge-in-viva-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: LIVEKIT_URL
+        sync: false
+      - key: LIVEKIT_API_KEY
+        sync: false
+      - key: LIVEKIT_API_SECRET
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false   # set to your Vercel URL once deployed, e.g. https://barge-in-viva.vercel.app
+      - key: DATABASE_URL
+        fromDatabase:
+          name: barge-in-viva-db
+          property: connectionString
+
+  # Background worker: the actual voice agent. No public HTTP endpoint —
+  # it just connects to LiveKit Cloud and waits for dispatched jobs.
+  - type: worker
+    name: barge-in-viva-agent
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python src/agent.py start
+    envVars:
+      - key: LIVEKIT_URL
+        sync: false
+      - key: LIVEKIT_API_KEY
+        sync: false
+      - key: LIVEKIT_API_SECRET
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_LLM_MODEL
+        value: openai/gpt-oss-120b
+      - key: RIME_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: barge-in-viva-db
+          property: connectionString
+
+# Both services point at the SAME Postgres database via fromDatabase, so
+# session history written by the agent worker is actually visible to the
+# API service in the real deployed version — a plain shared SQLite file
+# would NOT work here, since these are two separate services with
+# separate filesystems. Locally (no DATABASE_URL set), storage.py falls
+# back to a local SQLite file instead — see backend/src/storage.py.
