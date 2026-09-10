@@ -6,7 +6,7 @@ a follow-up mid-answer. Rime provides the primary spoken output — removing
 speech would remove the entire mechanic, not just a nice-to-have layer.
 
 ## Demo
-**[Watch the demo video](PASTE_YOUR_YOUTUBE_LINK_HERE)** (4-5 min)
+**[Watch the demo video](https://youtu.be/2GsayNyvld4?si=1WHNpiuCv8w-Rw-E)** (4-5 min)
 
 ## Problem & user
 Viva voce exams, thesis defenses, and technical interviews all share one
